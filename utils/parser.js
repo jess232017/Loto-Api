@@ -13,6 +13,7 @@ export function resultToJson(entrada) {
 
     //Obtener un Json a partir del Table HTML
     let resultado = HtmlTableToJson.parse(entrada).results;
+    resultado[0].pop();
 
     //Retornar JSON
     return resultado[0];
