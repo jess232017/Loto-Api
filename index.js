@@ -15,8 +15,7 @@ app.use( (req, res, next) => {
 
 const port = process.env.PORT || 4001;
 
-
-async function getFactura() {
+async function getResultado() {
     const url = "https://nuevaya.com.ni/loto-diaria-de-nicaragua/";
     try {
         const respuesta = await axios({
@@ -29,9 +28,8 @@ async function getFactura() {
     }
 }
 
-app.get('/obtener-todos', async(req, res) => {
-    const objCalcular = req.body;
-    let resultado = await getFactura(objCalcular);
+app.get('/obtener-todos', async(_, res) => {
+    let resultado = await getResultado();
 
     res.json({
         resultado,

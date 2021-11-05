@@ -15,5 +15,5 @@ export function resultToJson(entrada) {
     let resultado = HtmlTableToJson.parse(entrada).results;
 
     //Retornar JSON
-    return resultado;
+    return resultado[0];
 }
