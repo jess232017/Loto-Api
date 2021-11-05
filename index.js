@@ -9,7 +9,8 @@ const app = express();
 app.use(express.urlencoded({ extended: true }))
 
 app.use( (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", ["http://localhost:3000", "https://loto-nicaragua-3jci0gttb-test-team23.vercel.app"]);
+    //Access-Control-Allow-Origin": "*"
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
