@@ -24,6 +24,11 @@ async function getResultado() {
         });
 
         let resultado = HtmlTableToJson.parse(respuesta.data).results;
+        resultado[0].push();
+        resultado[1].push();
+        resultado[2].push();
+        resultado[3].push();
+        
         return resultado;
         
     } catch (error) {
