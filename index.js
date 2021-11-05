@@ -2,6 +2,7 @@ import express from 'express';
 import axios from 'axios';
 import qs from 'qs';
 import { resultToJson } from './utils/parser.js'
+import HtmlTableToJson from 'html-table-to-json';
 
 const app = express();
 
@@ -21,8 +22,10 @@ async function getResultado() {
         const respuesta = await axios({
             method: 'get', url
         });
+
+        let resultado = HtmlTableToJson.parse(respuesta.data).results;
+        return resultado;
         
-        return resultToJson(respuesta.data);
     } catch (error) {
         console.log(error);
     }
