@@ -1,7 +1,7 @@
 import express from 'express';
 import axios from 'axios';
 import qs from 'qs';
-import { resultToJson, selectToJson } from './utils/parser.js'
+import { resultToJson } from './utils/parser.js'
 
 const app = express();
 
