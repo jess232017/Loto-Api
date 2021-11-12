@@ -7,7 +7,7 @@ import HtmlTableToJson from 'html-table-to-json';
 const resultCache = new NodeCache();
 
 const resultado = async () => {
-    const isOnline = checkTime(11, 0, 11, 10) || checkTime(15, 0, 15, 10) || checkTime(20, 0, 20, 10);
+    const isOnline = checkTime(11, 0, 11, 10) || checkTime(15, 0, 15, 10) || checkTime(21, 0, 20, 10);
 
     if( isOnline === true || resultCache.has('resultado') === false){
         console.log("fetched")

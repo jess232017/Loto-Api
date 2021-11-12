@@ -13,17 +13,30 @@ app.use((req, res, next) => {
 
 const port = process.env.PORT || 4001;
 
-
-
 app.get('/obtener-todos', async(_, res) => {
     let resultado = await resultadoApi();
-
-    res.json({
-        resultado,
-        mensaje: "operacion exitosa"
-    });
+    res.json({ resultado, mensaje: "operacion exitosa" });
 });
 
+app.get('/obtener-diaria', async(_, res) => {
+    let resultado = await resultadoApi();
+    res.json({ resultado: resultado[0], mensaje: "operacion exitosa" });
+});
+
+app.get('/obtener-fecha', async(_, res) => {
+    let resultado = await resultadoApi();
+    res.json({ resultado: resultado[1], mensaje: "operacion exitosa" });
+});
+
+app.get('/obtener-juga', async(_, res) => {
+    let resultado = await resultadoApi();
+    res.json({ resultado: resultado[2], mensaje: "operacion exitosa" });
+});
+
+app.get('/obtener-premia', async(_, res) => {
+    let resultado = await resultadoApi();
+    res.json({ resultado: resultado[3], mensaje: "operacion exitosa" });
+});
 
 app.listen(port, () => {
     console.log(`El servidor esta funcionando en el puerto ${port}`)
