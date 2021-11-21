@@ -37,7 +37,7 @@ const fetchRemote = async() =>{
         let resultado = HtmlTableToJson.parse(respuesta.data).results;
         const today = new Date();
 
-        if(resultado[0].length !== 0){
+        if(resultado[0].length > 2 && resultado[0][3].length === 0){
             resultado[0].pop();
             resultado[1].pop();
             resultado[2].pop();
