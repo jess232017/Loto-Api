@@ -9,7 +9,7 @@ const resultCache = new NodeCache();
 const resultado = async () => {
     const isOnline = checkTime(11, 0, 11, 10) || checkTime(15, 0, 15, 10) || checkTime(21, 0, 20, 10);
 
-    if( isOnline === true || resultCache.has('resultado') === false){
+    if (isOnline === true || resultCache.has('resultado') === false) {
         console.log("fetched")
         return await fetchRemote();
     }
@@ -18,9 +18,9 @@ const resultado = async () => {
     return fetchLocal();
 }
 
-const fetchLocal = () =>{
+const fetchLocal = () => {
     try {
-        if(resultCache.has('resultado')){
+        if (resultCache.has('resultado')) {
             return resultCache.get('resultado');
         }
     } catch (error) {
@@ -28,16 +28,16 @@ const fetchLocal = () =>{
     }
 }
 
-const fetchRemote = async() =>{
+const fetchRemote = async () => {
     try {
         const respuesta = await axios({
-            method: 'get', url : 'https://nuevaya.com.ni/loto-diaria-de-nicaragua/'
+            method: 'get', url: 'https://nuevaya.com.ni/loto-diaria-de-nicaragua/'
         });
 
         let resultado = HtmlTableToJson.parse(respuesta.data).results;
         const today = new Date();
 
-        if(resultado[0].length > 2 && resultado[0][3].length === 0){
+        if (resultado[0].length > 2 && resultado[0][3].length === 0) {
             resultado[0].pop();
             resultado[1].pop();
             resultado[2].pop();
@@ -51,5 +51,5 @@ const fetchRemote = async() =>{
         console.log(error);
     }
 }
- 
+
 export default resultado;
