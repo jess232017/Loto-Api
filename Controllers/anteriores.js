@@ -54,7 +54,8 @@ const fetchRemote = async (name) => {
             }
 
             if (horaAux.includes("Fechas ")) {
-                numero = numAux;
+                numAux = numAux.match(/.{1,2}/g);
+                numero = `${numAux[0]} ${numAux[1]}${numAux[2]}`;
                 horaAux = horaAux.replace("Fechas ", "");
             }
 
