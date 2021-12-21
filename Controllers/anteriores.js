@@ -36,19 +36,42 @@ const fetchRemote = async (name) => {
 
         let anteriores = HtmlTableToJson.parse(respuesta.data)._results[0];
         anteriores = anteriores.map(value => {
-            let fechaAux = value["Fecha del Sorteo"].replace(" 2021", "").replace(" - ", "*");
+            let fechaAux = value["Fecha del Sorteo"];
+            let numAux = value["Números Ganadores"];
+            let horaAux = value["Juega"];
+
+            //Formatear fecha
+            fechaAux = fechaAux.replace(" 2021", "").replace(" - ", "*");
             fechaAux = fechaAux.split("*");
             const fecha = `${fechaAux[1]} ${fechaAux[0]}`;
 
-            let horaAux = value["Juega"].replace("Loto Diaria ", "");
-            horaAux = horaAux.replace("Fechas ", "");
-            horaAux = horaAux.replace("Juga", "");
+            //Formatear Numero
+            let numero;
+            if (horaAux.includes("Loto Diaria ")) {
+                numAux = numAux.match(/.{1,2}/g);
+                numero = `${numAux[0]} (${numAux[1]})`;
+                horaAux = horaAux.replace("Loto Diaria ", "");
+            }
+
+            if (horaAux.includes("Fechas ")) {
+                numero = numAux;
+                horaAux = horaAux.replace("Fechas ", "");
+            }
+
+            if (horaAux.includes("Premia")) {
+                numAux = numAux.match(/.{1,2}/g);
+                numero = `${numAux[0]} - ${numAux[1]}`;
+                horaAux = horaAux.replace("Premia", "");
+            }
+
+            if (horaAux.includes("Juga")) {
+                numero = numAux;
+                horaAux = horaAux.replace("Juga", "");
+            }
+
             horaAux = horaAux.replace(",", "");
 
             const hora = `${('00' + horaAux.match(/\d+/g)).slice(-2)}:00 ${horaAux.replace(/\d+/g, '')}`;
-
-            const numAux = value["Números Ganadores"].match(/.{1,2}/g);
-            const numero = `${numAux[0]} (${numAux[1]})`;
 
             return { fecha, hora, numero }
         })
